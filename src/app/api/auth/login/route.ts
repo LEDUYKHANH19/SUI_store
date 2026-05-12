@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const validation = loginSchema.safeParse(await req.json());
 
     if (!validation.success) {
-      // Zod trả về lỗi trong object 'error', không phải 'errors' trực tiếp trên result
+      console.log("Zod Validation Failed:", validation.error);
       return NextResponse.json(
         { error: validation.error.errors[0].message },
         { status: 400 }
