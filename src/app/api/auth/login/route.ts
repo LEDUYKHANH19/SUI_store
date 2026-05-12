@@ -10,10 +10,7 @@ export async function POST(req: NextRequest) {
 
     if (!validation.success) {
       return NextResponse.json(
-        {
-          // Truy cập đúng: validation (kết quả) -> error (đối tượng lỗi) -> errors (mảng chi tiết)
-          error: validation.error.errors[0].message
-        },
+        { error: validation.error.issues[0].message },
         { status: 400 }
       );
     }

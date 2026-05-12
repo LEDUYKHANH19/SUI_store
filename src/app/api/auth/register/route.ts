@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const validation = registerSchema.safeParse(await req.json());
     if (!validation.success) {
-      return NextResponse.json({ error: validation.error.errors[0].message }, { status: 400 });
+      return NextResponse.json({ error: validation.error.issues[0].message }, { status: 400 });
     }
 
     const { email, password, name } = validation.data;
