@@ -7,8 +7,13 @@ import { signJwtToken } from "@/lib/auth";
 export async function POST(req: NextRequest) {
   try {
     const validation = loginSchema.safeParse(await req.json());
+
     if (!validation.success) {
-      return NextResponse.json({ error: validation.error.errors[0].message }, { status: 400 });
+      // Zod trả về lỗi trong object 'error', không phải 'errors' trực tiếp trên result
+      return NextResponse.json(
+        { error: validation.error.errors[0].message },
+        { status: 400 }
+      );
     }
 
     const { email, password } = validation.data;
