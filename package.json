@@ -15,6 +15,8 @@
     "@mysten/dapp-kit": "^1.0.6",
     "@mysten/sui": "^2.16.2",
     "@prisma/client": "^6.4.1",
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.105.4",
     "@tanstack/react-query": "^5.100.9",
     "axios": "^1.16.0",
     "bcrypt": "^6.0.0",

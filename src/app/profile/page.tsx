@@ -4,6 +4,8 @@ import { verifyJwtToken } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { format } from "date-fns";
 import { ShoppingBag, ExternalLink, Package, User, Mail, ShieldCheck } from "lucide-react";
 
@@ -93,6 +95,15 @@ export default async function ProfilePage() {
                   </Badge>
                 </div>
               </div>
+              {user.role === "ADMIN" && (
+                <div className="pt-4 mt-4 border-t border-border/50">
+                  <Link href="/admin">
+                    <Button className="w-full">
+                      Quản Trị Hệ Thống (Admin Dashboard)
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
