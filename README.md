@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SUI E-Commerce Platform
+
+A production-ready e-commerce platform built with Next.js 15, Prisma, and SUI Blockchain Testnet.
+
+## Features
+
+- **Next.js 15 App Router**: Server and Client components.
+- **Tailwind v4 & ShadCN UI**: Premium dark-mode ready design.
+- **Prisma & PostgreSQL**: Robust database schema.
+- **JWT Authentication**: Secure login and registration.
+- **SUI Blockchain Integration**: Real Testnet payments using `@mysten/dapp-kit`.
+- **Global State**: Zustand for shopping cart management.
+
+## Prerequisites
+
+- Node.js 18+
+- Docker (for local PostgreSQL)
+- SUI Wallet Extension (e.g., Sui Wallet, Suiet)
 
 ## Getting Started
 
-First, run the development server:
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Start Database**
+   ```bash
+   docker-compose up -d
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Configure Environment**
+   Rename `.env.example` to `.env`. It contains default values that work with the local docker database.
+   Make sure to replace `NEXT_PUBLIC_MERCHANT_SUI_ADDRESS` with your actual SUI Testnet address.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. **Initialize Database**
+   ```bash
+   npx prisma migrate dev --name init
+   npx prisma generate
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+6. Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## Payment Flow Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Register an account and login.
+2. Go to Products and add items to your cart.
+3. Proceed to Checkout.
+4. Ensure your SUI wallet is set to **Testnet** and has SUI tokens (use the faucet inside the wallet).
+5. Fill in the shipping address and click **Pay with SUI**.
+6. Approve the transaction in your wallet popup.
+7. The backend will verify the transaction hash and mark the order as PAID.
+8. View your order history in your Profile.
