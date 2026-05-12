@@ -11,6 +11,7 @@ interface AddToCartButtonProps {
     name: string;
     price: number;
     image: string;
+    slug?: string;
   };
   stock: number;
 }
