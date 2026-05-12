@@ -9,9 +9,11 @@ export async function POST(req: NextRequest) {
     const validation = loginSchema.safeParse(await req.json());
 
     if (!validation.success) {
-      console.log("Zod Validation Failed:", validation.error);
       return NextResponse.json(
-        { error: validation.error.errors[0].message },
+        {
+          // Truy cập đúng: validation (kết quả) -> error (đối tượng lỗi) -> errors (mảng chi tiết)
+          error: validation.error.errors[0].message
+        },
         { status: 400 }
       );
     }
